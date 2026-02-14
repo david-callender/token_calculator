@@ -1,50 +1,110 @@
-# Welcome to your Expo app 👋
+# FoodFinder
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A tool for University of Minnesota students to get notifications for their
+favorite dining hall meals. This project is associated with
+[Social Coding](https://www.socialcoding.net/). If you are in the group and need
+access to the repository, email your github username to `calle159@umn.edu`.
 
-## Get started
+## Frontend
 
-1. Install dependencies
+### Stack
 
-   ```bash
-   npm install
-   ```
+-   Package Manager - [Bun](https://bun.com/)
+-   Framework - [Next.js](https://nextjs.org/)
+-   Styling - [Tailwind CSS](https://tailwindcss.com/)
+-   Formatter - [Prettier](https://prettier.io/)
+-   Linter - [Eslint](https://eslint.org/)
 
-2. Start the app
+### Getting started
 
-   ```bash
-   npx expo start
-   ```
+-   In a terminal, clone the repository using `git clone https://github.com/david-callender/FoodFinder.git`. This will create a folder called `FoodFinder` in the current working directory.
+-   Install bun from [here](https://bun.com/). You will have to completely restart your shell or VSCode for any `bun` commands to work.
+-   Run `bun install` to install all required packages.
+-   Run `bun pm trust --all` to trust installed packages.
+-   Create a `.env` file with the structure defined below.
+-   Run `bun dev` to start the dev server.
 
-In the output, you'll find options to open the app in a
+### Envirnoment Variables
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+Create a `.env` file in the `frontend/` folder that contains the following data, where `YOUR-KEY` can be anything, as long as it matches the backend.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```env
+NEXT_PUBLIC_BACKEND_URL=http://localhost:8080
+access_key=YOUR-KEY
+refresh_key=YOUR-KEY
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### Before you push
 
-## Learn more
+-   Run `bun lint` to lint your code for common issues.
+-   Run `bun format` to format your code.
 
-To learn more about developing your project with Expo, look at the following resources:
+## Backend
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+### Stack
 
-## Join the community
+-   Language [Go](https://go.dev/)
+-   API [Gin](https://github.com/gin-gonic/gin)
 
-Join our community of developers creating universal apps.
+### Environment Variables
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+#### .ENV
+Create a `.env` file in the `backend/` folder that contains the following data, where `YOUR-KEY` can be anything, as long as it matches the frontend.
+
+```env
+access_key=YOUR-KEY
+refresh_key=YOUR-KEY
+```
+
+#### jsonv2
+
+The `dineocclient` package uses the `encodings/json/v2` API. Currently, this
+library is not available unless you set the following environment variable prior
+to builds: `GOEXPERIMENT=jsonv2`
+
+To set this environment variable on powershell, use the following command:
+
+`$env:GOEXPERIMENT="jsonv2"`
+
+Using this command will set the environment variable for the rest of your
+powreshell session.
+
+In bash, you can use the following command:
+
+`export GOEXPERIMENT=jsonv2`
+
+Other *nix shells will have similar syntax, if you aren't using bash then you can
+look up specific methods to set variables in your particular shell.
+
+### Utils
+The go.mod files of all current modules, and any new modules, should be set up with
+`replace github.com/david-callender/FoodFinder/utils => ../utils` to allow any libraries
+within utils to be used as dependencies across all modules in the project.
+
+### Notifier
+The module `notifier` located at `/notifier` from the root of the project
+reads its sending address as `NOTIFIER_EMAIL`, its SMTP password as
+`NOTIFIER_PASSWORD`, and the database connection string as `DATABASE_URL`. The
+notifier should not generally be run from dev machines without prior discussion.
+However, you must make sure to set these environment variables before running
+it or else you will get an error.
+
+Make sure run `go get .` in the `notifier` directory as well.
+
+### Scraper
+The module `scraper` located at `/scraper` from the root of the project also
+reads the database connections tring as `DATABASE_URL`. It can take arguments
+in the form of `-back N` and `-forward N` which specify the number of days in
+the past and future to scrape. It will delete all menu data that is older than
+the furthest day in the past that will be scraped based on specified values.
+
+### Getting started
+
+-   Install Go.
+-   Run `go get .` to install packages.
+-   Run `go install github.com/air-verse/air@latest` to install air.
+-   Run `air` to start the dev server.
+
+### Before you push
+
+-   Run `go fmt .` format your code.
