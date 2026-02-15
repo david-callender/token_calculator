@@ -29,6 +29,8 @@ type Props = {
 };
 
 export const Chat: FC<Props> = ({ numTokens, setNumTokens }) => {
+  const [concreteTokens, setConcreteTokens] = useState(0);
+
   const [engine, setEngine] = useState<MLCEngine>();
   const [startedLoading, setStartedLoading] = useState(false);
   const [modelLoad, setModelLoad] = useState("");
@@ -38,7 +40,10 @@ export const Chat: FC<Props> = ({ numTokens, setNumTokens }) => {
   const [query, setQuery] = useState("");
 
   const [messages, setMessages] = useState<MessagesT>([
-    { role: "system", content: "You are a helpful AI assistant." },
+    {
+      role: "system",
+      content: "You are a helpful AI assistant. Do not produce markdown text.",
+    },
   ]);
 
   const ref = useRef<HTMLDivElement>(null);
@@ -49,6 +54,7 @@ export const Chat: FC<Props> = ({ numTokens, setNumTokens }) => {
     if (engine === undefined) {
       throw new Error("don't have engine yet");
     }
+
     const chunks = await engine.chat.completions.create({
       messages: [...oldMessages, { content: query, role: "user" }],
       stream: true,
@@ -62,6 +68,11 @@ export const Chat: FC<Props> = ({ numTokens, setNumTokens }) => {
       setResponse(reply);
       ref.current?.scrollTo({ top: ref.current.scrollHeight });
       setNumTokens((n) => n + 1);
+      const usage = chunk.usage;
+      if (usage !== undefined) {
+        setConcreteTokens((c) => c + usage.total_tokens);
+        setNumTokens((n) => concreteTokens + usage.total_tokens);
+      }
     }
     setResponse(undefined);
     setMessages((m) => [
@@ -82,7 +93,8 @@ export const Chat: FC<Props> = ({ numTokens, setNumTokens }) => {
     setMessages([
       { role: "system", content: "You are a helpful AI assistant." },
     ]);
-    console.log("reset");
+    setNumTokens(0);
+    setConcreteTokens(0);
   };
 
   return (
