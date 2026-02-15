@@ -6,7 +6,7 @@ export const Title: FC = () => {
             ⚡ Watt Did You Spend? ⚡
         </div>
         <div className="text-xl text-center mt-2.5 mb-5 text-serif">
-            Encouraging responsible AI use
+            Encouraging responsible AI usage
         </div>
     </>
 }

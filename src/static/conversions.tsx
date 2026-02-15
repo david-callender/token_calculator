@@ -33,7 +33,7 @@ export const WasteEntries: MendEntry[] = [
 
         {
             detail: "US Household (%)",
-            endUnit: "Power Usage Per Hour",
+            endUnit: "Power Usage Per Hour for",
             conversionFactor: (365 * 24 * 100) / 3.78e10 ,
             startUnit: StartUnit.joules,
             emoji: "🏠"
