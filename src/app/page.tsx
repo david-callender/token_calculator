@@ -1,23 +1,24 @@
 import type { FC } from "react";
 
-import { WasteView, type WasteEntry } from "./components/WasteView";
-import { MendWasteView } from "./components/MendWasteView";
+import { MendWasteView } from "../components/MendWasteView";
+import { Title } from "../components/Title";
 
 const Home: FC = () => {
 
-  
-
-  return (
+  return (<>
     <div>
-
-      <MendWasteView />
+      <Title />
+      <div className="flex justify-center">
+        <MendWasteView />
+      </div>
     </div>
+  </>
   )
 
 };
 
 
-// tokens -> Water & electricity -> Waste Entry -> MendEntry
+// tokens -> Water, electricity, Carbon -> Waste Entry -> MendEntry
 
 
 export default Home;
