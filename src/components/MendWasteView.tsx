@@ -1,8 +1,9 @@
 "use client";
 
-import { FC, useState } from "react"
+import { FC } from "react"
 import { MendView, WasteView, StartUnit } from "./ListView"
-import { MendEntry } from "./ListView"
+import { MendEntries, WasteEntries } from "@/static/conversions";
+
 
 export class AppState {
     tokens: number;
@@ -44,57 +45,6 @@ type Props = {
 }
 
 export const MendWasteView: FC<Props> = ({ state }) => {
-    
-
-    const WasteEntries: MendEntry[] = [
-        {
-            detail: "",
-            endUnit: "lake superiors",
-            conversionFactor: 3.13e-16,
-            startUnit: StartUnit.gallons,
-            emoji: "🌊"
-        },
-        {
-            detail: "burgers",
-            endUnit: "calories",
-            conversionFactor: 4.12e-7,
-            startUnit: StartUnit.joules
-        },
-        {
-            detail: "carbon",
-            endUnit: "kg",
-            conversionFactor: 2.31e-5,
-            startUnit: StartUnit.kilogramsCarbon
-        },
-
-        {
-            detail: "hamster wheels",
-            endUnit: "hamster days",
-            conversionFactor: 1.0,
-            startUnit: StartUnit.joules
-        }
-    ]
-
-    const MendEntries: MendEntry[] = [
-        {
-            detail: "water",
-            endUnit: "gallons",
-            conversionFactor: 1.0,
-            startUnit: StartUnit.gallons
-        },
-        {
-            detail: "burgers",
-            endUnit: "calories",
-            conversionFactor: 1.0,
-            startUnit: StartUnit.joules
-        },
-        {
-            detail: "carbon",
-            endUnit: "kg",
-            conversionFactor: 1.0,
-            startUnit: StartUnit.kilogramsCarbon
-        }
-    ]
 
     return <>
         <div>
