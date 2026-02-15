@@ -3,6 +3,7 @@ import type { FC } from "react";
 import { MendWasteView } from "../components/MendWasteView";
 import { Title } from "../components/Title";
 import { Chat } from "@/components/Chat";
+import { ClientView } from "@/components/ClientView";
 
 
 const Home: FC = () => {
@@ -11,8 +12,7 @@ const Home: FC = () => {
     <div>
       <Title />
       <div className="flex justify-center">
-        <Chat />  
-        <MendWasteView />
+        <ClientView />
       </div>
     </div>
   </>

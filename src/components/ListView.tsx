@@ -13,7 +13,8 @@ export type MendEntry = {
     detail: string;
     endUnit: string;
     conversionFactor: number; // converts from Watts | Gallons -> unit
-    startUnit: StartUnit
+    startUnit: StartUnit,
+    emoji?: string
 }
 
 

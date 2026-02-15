@@ -14,7 +14,7 @@ import type {
   InitProgressReport,
   MLCEngine,
 } from "@mlc-ai/web-llm";
-import type { FC } from "react";
+import type { Dispatch, FC, SetStateAction } from "react";
 
 export type MessagesT = (
   | ChatCompletionSystemMessageParam
@@ -23,13 +23,20 @@ export type MessagesT = (
   | ChatCompletionToolMessageParam
 )[];
 
-export const Chat: FC = () => {
+type Props = {
+  numTokens: number,
+  setNumTokens: Dispatch<SetStateAction<number>>
+}
+
+export const Chat: FC<Props> = ({ numTokens, setNumTokens }) => {
   const [engine, setEngine] = useState<MLCEngine>();
   const [startedLoading, setStartedLoading] = useState(false);
   const [modelLoad, setModelLoad] = useState("");
 
-  const [query, setQuery] = useState("");
   const [response, setResponse] = useState<string>();
+
+  const [query, setQuery] = useState("");
+
   const [messages, setMessages] = useState<MessagesT>([
     { role: "system", content: "You are a helpful AI assistant." },
   ]);
@@ -54,6 +61,8 @@ export const Chat: FC = () => {
       reply += chunk.choices[0]?.delta.content ?? "";
       setResponse(reply);
       ref.current?.scrollTo({ top: ref.current.scrollHeight });
+      setNumTokens((n: number) => {console.log(n); return n + 1});
+      
     }
     setResponse(undefined);
     setMessages((m) => [
