@@ -140,6 +140,7 @@ export const Chat: FC<Props> = ({ numTokens, setNumTokens }) => {
             response={response}
             ref={ref}
             onChatReset={onChatReset}
+            tokens={numTokens}
           />
           <QueryBox query={query} setQuery={setQuery} onSubmit={onSubmit} />
         </>
