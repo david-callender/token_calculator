@@ -9,9 +9,10 @@ export type Message = {
 
 type Props = {
   messages: MessagesT;
+  response: string | undefined;
 };
 
-export const Messages: FC<Props> = ({ messages }) => {
+export const Messages: FC<Props> = ({ messages, response }) => {
   return (
     <div className="flex w-full flex-col border">
       {messages.map((message, i) => {
@@ -32,6 +33,7 @@ export const Messages: FC<Props> = ({ messages }) => {
           );
         }
       })}
+      {response !== undefined && <div className="self-start">{response}</div>}
     </div>
   );
 };

@@ -25,8 +25,10 @@ export type MessagesT = (
 
 export const Chat: FC = () => {
   const [engine, setEngine] = useState<MLCEngine>();
+  const [modelLoad, setModelLoad] = useState("");
 
   const [query, setQuery] = useState("");
+  const [response, setResponse] = useState<string>();
   const [messages, setMessages] = useState<MessagesT>([
     { role: "system", content: "You are a helpful AI assistant." },
   ]);
@@ -37,56 +39,69 @@ export const Chat: FC = () => {
     if (engine === undefined) {
       throw new Error("don't have engine yet");
     }
-    const reply = await engine.chat.completions.create({
+    const chunks = await engine.chat.completions.create({
       messages: [...oldMessages, { content: query, role: "user" }],
+      stream: true,
+      stream_options: { include_usage: true },
     });
 
-    console.log(reply.choices[0].message);
+    let reply = "";
+
+    for await (const chunk of chunks) {
+      reply += chunk.choices[0]?.delta.content ?? "";
+      setResponse(reply);
+    }
+    setResponse(undefined);
     setMessages((m) => [
       ...m,
       {
-        content: reply.choices[0].message.content ?? "no content",
+        content: reply,
         role: "assistant",
       },
     ]);
   };
 
   const onSubmit = (): void => {
-    console.log(messages);
-    setMessages([...messages, { content: query, role: "user" }]);
-    console.log(messages);
     void generateResponse();
   };
 
   return (
     <div className="flex w-md flex-col">
-      <button
-        className="border"
-        onClick={() => {
-          void (async (): Promise<void> => {
-            // Initialize with a progress callback
-            const initProgressCallback = (
-              progress: InitProgressReport
-            ): void => {
-              console.log("Model loading progress:", progress);
-            };
+      {engine === undefined ? (
+        <>
+          <button
+            className="border"
+            onClick={() => {
+              void (async (): Promise<void> => {
+                // Initialize with a progress callback
+                const initProgressCallback = (
+                  progress: InitProgressReport
+                ): void => {
+                  setModelLoad(progress.text);
+                };
 
-            // Using CreateMLCEngine
-            const engine = await CreateMLCEngine(
-              "SmolLM2-360M-Instruct-q0f16-MLC",
-              {
-                initProgressCallback,
-              }
-            );
+                // Using CreateMLCEngine
+                const engine = await CreateMLCEngine(
+                  "SmolLM2-135M-Instruct-q0f16-MLC",
+                  {
+                    initProgressCallback,
+                  }
+                );
 
-            setEngine(engine);
-          })();
-        }}
-      >
-        Load Model
-      </button>
-      <Messages messages={messages} />
-      <QueryBox query={query} setQuery={setQuery} onSubmit={onSubmit} />
+                setEngine(engine);
+              })();
+            }}
+          >
+            Load Model
+          </button>
+          <div>{modelLoad}</div>
+        </>
+      ) : (
+        <>
+          <Messages messages={messages} response={response} />
+          <QueryBox query={query} setQuery={setQuery} onSubmit={onSubmit} />
+        </>
+      )}
     </div>
   );
 };
