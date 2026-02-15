@@ -34,22 +34,22 @@ export class AppState {
 }
 
 export const MendWasteView: FC = () => {
-
+    // this will be handled on davids component
     const [numTokens, setNumTokens] = useState(5);
 
     let state = new AppState(numTokens);
 
     const WasteEntries: MendEntry[] = [
         {
-            detail: "water",
-            endUnit: "gallons",
-            conversionFactor: 1.0,
+            detail: "",
+            endUnit: "lake superiors",
+            conversionFactor: 3.13e-16,
             startUnit: StartUnit.gallons
         },
         {
             detail: "burgers",
             endUnit: "calories",
-            conversionFactor: 1.0,
+            conversionFactor: 4.12e-7,
             startUnit: StartUnit.joules
         },
         {
