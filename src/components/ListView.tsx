@@ -3,17 +3,17 @@ import { WasteBox } from "./WasteBox"
 import { MendBox } from "./MendBox";
 import { AppState } from "./MendWasteView";
 
-export enum ResourceType {
-    water,
-    energy,
-    carbon
+export enum StartUnit {
+    gallons,
+    joules,
+    kilogramsCarbon
 }
 
 export type MendEntry = {
     detail: string;
-    units: string;
+    endUnit: string;
     conversionFactor: number; // converts from Watts | Gallons -> unit
-    resourceType: ResourceType
+    startUnit: StartUnit
 }
 
 

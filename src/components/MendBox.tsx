@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { MendEntry, ResourceType } from "./ListView";
+import { MendEntry, StartUnit } from "./ListView";
 import { AppState } from "./MendWasteView";
 
 type Props = {
@@ -10,20 +10,20 @@ export const MendBox: FC<Props> = ({ entry, state }) => {
     const [convertedNumber, changeConvertedNumber] = useState(0);
     
     useEffect(() => {
-        if (entry.resourceType == ResourceType.energy) {
+        if (entry.startUnit == StartUnit.joules) {
             changeConvertedNumber(entry.conversionFactor * state.joules);
-        } else if (entry.resourceType == ResourceType.water) {
+        } else if (entry.startUnit == StartUnit.gallons) {
             changeConvertedNumber(entry.conversionFactor * state.gallons);
-        } else if (entry.resourceType == ResourceType.carbon) {
-            changeConvertedNumber(entry.conversionFactor * state.carbon);
+        } else if (entry.startUnit == StartUnit.kilogramsCarbon) {
+            changeConvertedNumber(entry.conversionFactor * state.kilogramsCarbon);
         }
-    }, [state.gallons, state.joules, state.carbon])
+    }, [state.gallons, state.joules, state.kilogramsCarbon])
     
 
     return <>
 
         <div className="rounded-xl bg-foreground m-2 place-self-center flex p-5 pl-2 shadow-xl hover:-translate-y-1 transition-all w-1/2 font-serif">
-            <span className="w-1/2 text-left">{entry.units} {entry.detail}</span> 
+            <span className="w-1/2 text-left">{entry.endUnit} {entry.detail}</span> 
             <span className="font-mono text-right w-1/2">{convertedNumber.toFixed(3)}</span> 
         </div>
     </>

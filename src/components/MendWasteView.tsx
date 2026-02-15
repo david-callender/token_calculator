@@ -1,13 +1,13 @@
 "use client";
 
 import { FC, useState } from "react"
-import { MendView, WasteView, ResourceType } from "./ListView"
+import { MendView, WasteView, StartUnit } from "./ListView"
 import { MendEntry } from "./ListView"
 
 export type AppState = {
     gallons: number,
     joules: number,
-    carbon: number
+    kilogramsCarbon: number
 }
 
 export const MendWasteView: FC = () => {
@@ -15,54 +15,54 @@ export const MendWasteView: FC = () => {
     const [joules, setJoules] = useState(12);
     const [carbon, setCarbon] = useState(15);
 
-    const state = {
-        gallons,
-        joules,
-        carbon
+    const state: AppState = {
+        gallons: gallons,
+        joules: joules,
+        kilogramsCarbon: carbon
     }
 
     const WasteEntries: MendEntry[] = [
         {
             detail: "water",
-            units: "gallons",
+            endUnit: "gallons",
             conversionFactor: 1.0,
-            resourceType: ResourceType.water
+            startUnit: StartUnit.gallons
         },
         {
             detail: "burgers",
-            units: "calories",
+            endUnit: "calories",
             conversionFactor: 1.0,
-            resourceType: ResourceType.energy
+            startUnit: StartUnit.joules
         },
         {
             detail: "carbon",
-            units: "kg",
+            endUnit: "kg",
             conversionFactor: 1.0,
-            resourceType: ResourceType.carbon
+            startUnit: StartUnit.kilogramsCarbon
         }
     ]
 
     const MendEntries: MendEntry[] = [
         {
             detail: "water",
-            units: "gallons",
+            endUnit: "gallons",
             conversionFactor: 1.0,
-            resourceType: ResourceType.water
+            startUnit: StartUnit.gallons
         },
         {
             detail: "burgers",
-            units: "calories",
+            endUnit: "calories",
             conversionFactor: 1.0,
-            resourceType: ResourceType.energy
+            startUnit: StartUnit.joules
         },
         {
             detail: "carbon",
-            units: "kg",
+            endUnit: "kg",
             conversionFactor: 1.0,
-            resourceType: ResourceType.carbon
+            startUnit: StartUnit.kilogramsCarbon
         }
     ]
-    
+
     return <>
         <div>
             <WasteView entries={WasteEntries} state={state}/>
