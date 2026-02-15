@@ -61,9 +61,9 @@ export const MendEntries: MendEntry[] = [
   },
 
   {
-    detail: "Donated to charity",
-    endUnit: "$",
-    conversionFactor: 1,
+    detail: "Meals for Children",
+    endUnit: "",
+    conversionFactor: 1 / 0.09,
     startUnit: StartUnit.dollars,
   },
 ];

@@ -30,7 +30,7 @@ export const MendBox: FC<Props> = ({ entry, state }) => {
         entry.conversionFactor * state.convertToKilogramsCarbon
       );
     } else if (entry.startUnit == StartUnit.dollars) {
-      setConvertedNumber(state.convertToDollars);
+      setConvertedNumber(state.convertToDollars * entry.conversionFactor);
     }
   }, [state.tokens]);
 
