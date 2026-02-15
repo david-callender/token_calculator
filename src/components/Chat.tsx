@@ -99,7 +99,6 @@ export const Chat: FC<Props> = ({ numTokens, setNumTokens }) => {
 
   return (
     <div className="flex w-lg flex-col gap-2">
-      <div>{concreteTokens}</div>
       {engine === undefined ? (
         <>
           <div className="text-center">

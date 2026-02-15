@@ -48,7 +48,6 @@ export const MendWasteView: FC<Props> = ({ state }) => {
 
     return <>
         <div>
-            <div>Tokens: {state.tokens}</div>
             <WasteView entries={WasteEntries} state={state}/>
             <MendView entries={MendEntries}  state={state}/>
         </div>
