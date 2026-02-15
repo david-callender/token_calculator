@@ -5,7 +5,8 @@ export const WasteEntries: MendEntry[] = [
             detail: "Drinks for ants",
             endUnit: "",
             conversionFactor: 1 / 10e-6,
-            startUnit: StartUnit.gallons
+            startUnit: StartUnit.gallons,
+            emoji: "🐜"
         },
         {
             detail: "burgers",
@@ -23,17 +24,19 @@ export const WasteEntries: MendEntry[] = [
         },
 
         {
-            detail: "Hamster Wheel",
-            endUnit: "Days on",
+            detail: "Time on Hamster Wheel (Days)",
+            endUnit: "",
             conversionFactor: 1 / 1800,
             startUnit: StartUnit.joules,
+            emoji: "🐹"
         },
 
         {
             detail: "US Household (%)",
             endUnit: "Power Usage Per Hour",
             conversionFactor: (365 * 24 * 100) / 3.78e10 ,
-            startUnit: StartUnit.joules
+            startUnit: StartUnit.joules,
+            emoji: "🏠"
         }
     ]
 
@@ -59,7 +62,7 @@ export const MendEntries: MendEntry[] = [
 
     {
         detail: "donate to charity",
-        endUnit: "",
+        endUnit: "$",
         conversionFactor: 1,
         startUnit: StartUnit.dollars
     },

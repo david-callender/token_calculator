@@ -38,7 +38,8 @@ export const WasteBox: FC<Props> = ({ entry, state }) => {
             
             <div className="font-mono text-right text-2xl w-1/3 place-self-center">{formatNumber(convertedNumber)}</div> 
         
-        </div>
+        </div>  
+        
     
         
     </>

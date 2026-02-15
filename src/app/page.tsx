@@ -1,9 +1,10 @@
 import type { FC } from "react";
 
-import { MendWasteView } from "../components/MendWasteView";
+
 import { Title } from "../components/Title";
-import { Chat } from "@/components/Chat";
+
 import { ClientView } from "@/components/ClientView";
+import { Footer } from "@/components/Footer";
 
 
 const Home: FC = () => {
@@ -15,6 +16,7 @@ const Home: FC = () => {
         <ClientView />
       </div>
     </div>
+    <Footer />
   </>
   )
 

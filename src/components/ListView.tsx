@@ -28,7 +28,7 @@ type Props = {
 
 export const WasteView: FC<Props> = ({ entries, state }) => {
     return <>
-        <div className="flex m-5 min-w-xl flex-col border-border border-5 rounded-md">
+        <div className="flex m-5 min-w-xl flex-col border-border border-5 rounded-md shadow-2xl">
             {entries.map((entry, index) => {
                 return (
                     <WasteBox key={index} entry={entry} state={state}/>
@@ -43,10 +43,9 @@ export const WasteView: FC<Props> = ({ entries, state }) => {
 export const MendView: FC<Props> = ({ entries, state }) => {
 
     return <>
-        <div className="flex m-5 min-w-xl flex-col border-border border-5 rounded-md">
+        <div className="flex pt-3 pb-3 m-5 min-w-xl flex-col border-border border-5 rounded-md shadow-2xl">
             {entries.map((entry, index) => {
                 return (
-
                     <MendBox key={index} entry={entry} state={state} />
                 )
             })}
