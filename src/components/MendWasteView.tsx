@@ -48,7 +48,9 @@ export const MendWasteView: FC<Props> = ({ state }) => {
 
     return <>
         <div>
+            <h1 className="text-3xl text-center font-mono">If you used a non-local llm 🤖</h1>
             <WasteView entries={WasteEntries} state={state}/>
+            <h1 className="text-3xl font-serif text-center pt-7.5"><strong>What you could do to mend it...</strong></h1>
             <MendView entries={MendEntries}  state={state}/>
         </div>
         

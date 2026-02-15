@@ -11,7 +11,7 @@ const Home: FC = () => {
   return (<>
     <div>
       <Title />
-      <div className="flex justify-center">
+      <div>
         <ClientView />
       </div>
     </div>

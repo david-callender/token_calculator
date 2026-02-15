@@ -6,7 +6,8 @@ import { AppState } from "./MendWasteView";
 export enum StartUnit {
     gallons,
     joules,
-    kilogramsCarbon
+    kilogramsCarbon,
+    dollars
 }
 
 export type MendEntry = {
@@ -27,7 +28,7 @@ type Props = {
 
 export const WasteView: FC<Props> = ({ entries, state }) => {
     return <>
-        <div className="flex m-10 min-w-xl flex-col border-border border-5 rounded-md">
+        <div className="flex m-5 min-w-xl flex-col border-border border-5 rounded-md">
             {entries.map((entry, index) => {
                 return (
                     <WasteBox key={index} entry={entry} state={state}/>
@@ -42,7 +43,7 @@ export const WasteView: FC<Props> = ({ entries, state }) => {
 export const MendView: FC<Props> = ({ entries, state }) => {
 
     return <>
-        <div className="flex m-10 min-w-xl flex-col border-border border-5 rounded-md">
+        <div className="flex m-5 min-w-xl flex-col border-border border-5 rounded-md">
             {entries.map((entry, index) => {
                 return (
 
