@@ -119,7 +119,7 @@ export const Chat: FC<Props> = ({ numTokens, setNumTokens }) => {
 
                 // Using CreateMLCEngine
                 const engine = await CreateMLCEngine(
-                  "Llama-3.2-1B-Instruct-q4f16_1-MLC",
+                  "Llama-3.2-3B-Instruct-q4f32_1-MLC",
                   {
                     initProgressCallback,
                   }

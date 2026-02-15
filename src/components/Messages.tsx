@@ -25,7 +25,7 @@ export const Messages: FC<Props> = ({
   }
   return (
     <div
-      className="flex max-h-200 w-full flex-col overflow-auto border bg-slate-200 rounded-xl"
+      className="flex max-h-200 w-full flex-col overflow-auto rounded-xl border bg-slate-200"
       ref={ref}
     >
       <button
