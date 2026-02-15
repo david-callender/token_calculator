@@ -1,31 +1,16 @@
 import type { FC } from "react";
 
 import { WasteView, type WasteEntry } from "./components/WasteView";
+import { MendWasteView } from "./components/MendWasteView";
 
 const Home: FC = () => {
 
-  const entries: WasteEntry[] = [
-    {
-        detail: "water",
-        units: "gallons",
-        value: 5
-    },
-    {
-        detail: "electricity",
-        units: "watts",
-        value: 10
-    },
-    {
-        detail: "mice",
-        units: "lives",
-        value: 5
-    }
-  ]
+  
 
   return (
     <div>
 
-      <WasteView entries={entries} />
+      <MendWasteView />
     </div>
   )
 
