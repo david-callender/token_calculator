@@ -41,7 +41,7 @@ export const MendBox: FC<Props> = ({ entry, state }) => {
           onClick={() => {
             setToggled(!toggled);
           }}
-          className="bg-foreground z-4 m-2 flex w-2/3 place-self-center rounded-xl p-7 pl-2 font-serif text-lg shadow-2xl transition-all hover:-translate-y-7"
+          className="bg-foreground z-4 m-2 flex w-2/3 place-self-center rounded-xl p-7 pl-2 font-serif text-lg shadow-2xl transition-all hover:-translate-y-9"
         >
           <div className="bg-foreground z-3 grow place-self-center text-left font-semibold">
             {entry.endUnit} {entry.detail}
@@ -52,7 +52,7 @@ export const MendBox: FC<Props> = ({ entry, state }) => {
         </div>
         <div className="bg-waste absolute bottom-5 z-1 min-h-10 w-2/3 rounded-xl pt-7 pr-5 pb-2 pl-5 font-mono text-xs shadow-2xl transition-all duration-150 group-hover:bottom-0">
           {" "}
-          This Conversation, everyday,for 10 years:{" "}
+          This Conversation, everyday, for 10 years:{" "}
           {formatNumber(convertedNumber * 365 * 10)} {entry.endUnit}
         </div>
       </div>

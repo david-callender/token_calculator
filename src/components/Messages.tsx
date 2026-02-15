@@ -12,6 +12,7 @@ type Props = {
   response: string | undefined;
   ref: Ref<HTMLDivElement>;
   onChatReset: () => void;
+  tokens: number;
 };
 
 export const Messages: FC<Props> = ({
@@ -19,6 +20,7 @@ export const Messages: FC<Props> = ({
   response,
   ref,
   onChatReset,
+  tokens,
 }) => {
   if (messages.length === 1) {
     return <div className="text-center">Type a message to get started</div>;
@@ -28,6 +30,9 @@ export const Messages: FC<Props> = ({
       className="flex max-h-200 w-full flex-col overflow-auto rounded-xl border bg-slate-200"
       ref={ref}
     >
+      <div className="absolute ml-4 -mt-3 rounded-xl bg-slate-200 py-1 px-2 border font-bold" style={{color: `rgb(${((tokens / 1000) * 255)}, 0, 0)`}}>
+        Tokens: {tokens}
+      </div>
       <button
         className="mt-2 mr-2 self-end-safe rounded-xl bg-red-400 px-2 py-1 hover:cursor-pointer disabled:cursor-not-allowed disabled:text-gray-600"
         onClick={onChatReset}
