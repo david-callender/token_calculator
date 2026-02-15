@@ -24,9 +24,9 @@ export type MessagesT = (
 )[];
 
 type Props = {
-  numTokens: number,
-  setNumTokens: Dispatch<SetStateAction<number>>
-}
+  numTokens: number;
+  setNumTokens: Dispatch<SetStateAction<number>>;
+};
 
 export const Chat: FC<Props> = ({ numTokens, setNumTokens }) => {
   const [engine, setEngine] = useState<MLCEngine>();
@@ -61,8 +61,7 @@ export const Chat: FC<Props> = ({ numTokens, setNumTokens }) => {
       reply += chunk.choices[0]?.delta.content ?? "";
       setResponse(reply);
       ref.current?.scrollTo({ top: ref.current.scrollHeight });
-      setNumTokens((n: number) => {console.log(n); return n + 1});
-      
+      setNumTokens((n) => n + 1);
     }
     setResponse(undefined);
     setMessages((m) => [
@@ -77,6 +76,13 @@ export const Chat: FC<Props> = ({ numTokens, setNumTokens }) => {
   const onSubmit = (): void => {
     setQuery("");
     void generateResponse();
+  };
+
+  const onChatReset = (): void => {
+    setMessages([
+      { role: "system", content: "You are a helpful AI assistant." },
+    ]);
+    console.log("reset");
   };
 
   return (
@@ -101,7 +107,7 @@ export const Chat: FC<Props> = ({ numTokens, setNumTokens }) => {
 
                 // Using CreateMLCEngine
                 const engine = await CreateMLCEngine(
-                  "SmolLM2-135M-Instruct-q0f16-MLC",
+                  "Llama-3.2-1B-Instruct-q4f16_1-MLC",
                   {
                     initProgressCallback,
                   }
@@ -117,7 +123,12 @@ export const Chat: FC<Props> = ({ numTokens, setNumTokens }) => {
         </>
       ) : (
         <>
-          <Messages messages={messages} response={response} ref={ref} />
+          <Messages
+            messages={messages}
+            response={response}
+            ref={ref}
+            onChatReset={onChatReset}
+          />
           <QueryBox query={query} setQuery={setQuery} onSubmit={onSubmit} />
         </>
       )}

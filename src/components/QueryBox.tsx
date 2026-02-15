@@ -16,14 +16,14 @@ export const QueryBox: FC<Props> = ({ query, setQuery, onSubmit }) => {
             e.preventDefault();
           }
         }}
-        className="field-sizing-content grow rounded-xl border px-3 py-2"
+        className="field-sizing-content grow rounded-xl border px-3 py-2 bg-slate-200"
         value={query}
         onChange={(e) => {
           setQuery(e.target.value);
         }}
       />
-      <button className="border hover:cursor-pointer" type="submit">
-        Go
+      <button className="border hover:cursor-pointer bg-slate-200 self-center rounded-md p-1.5" type="submit">
+        Send
       </button>
     </form>
   );
