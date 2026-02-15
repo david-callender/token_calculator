@@ -11,13 +11,13 @@ export const MendBox: FC<Props> = ({ entry, state }) => {
     
     useEffect(() => {
         if (entry.startUnit == StartUnit.joules) {
-            changeConvertedNumber(entry.conversionFactor * state.joules);
+            changeConvertedNumber(entry.conversionFactor * state.convertToJoules);
         } else if (entry.startUnit == StartUnit.gallons) {
-            changeConvertedNumber(entry.conversionFactor * state.gallons);
+            changeConvertedNumber(entry.conversionFactor * state.convertToGallons);
         } else if (entry.startUnit == StartUnit.kilogramsCarbon) {
-            changeConvertedNumber(entry.conversionFactor * state.kilogramsCarbon);
+            changeConvertedNumber(entry.conversionFactor * state.convertToKilogramsCarbon);
         }
-    }, [state.gallons, state.joules, state.kilogramsCarbon])
+    }, [state.tokens])
     
 
     return <>

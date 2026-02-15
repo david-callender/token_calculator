@@ -26,14 +26,13 @@ type Props = {
 
 export const WasteView: FC<Props> = ({ entries, state }) => {
     return <>
-            <div className="flex m-10 min-w-xl flex-col border-border border-5 rounded-md">
-                {entries.map((entry, index) => {
-                    return (
-                        <WasteBox key={index} entry={entry} state={state}/>
-                    )
-                })}
-
-            </div> 
+        <div className="flex m-10 min-w-xl flex-col border-border border-5 rounded-md">
+            {entries.map((entry, index) => {
+                return (
+                    <WasteBox key={index} entry={entry} state={state}/>
+                )
+            })}
+        </div> 
     </> 
 }
 
@@ -41,16 +40,13 @@ export const WasteView: FC<Props> = ({ entries, state }) => {
 
 export const MendView: FC<Props> = ({ entries, state }) => {
     return <>
-        
-            <div className="flex m-10 min-w-xl flex-col border-border border-5 rounded-md">
-                {entries.map((entry, index) => {
-                    return (
-                        <MendBox key={index} entry={entry} state={state} />
-                    )
-                })}
+        <div className="flex m-10 min-w-xl flex-col border-border border-5 rounded-md">
+            {entries.map((entry, index) => {
+                return (
+                    <MendBox key={index} entry={entry} state={state} />
+                )
+            })}
 
-            </div>
-
-        
+        </div>
     </> 
 }

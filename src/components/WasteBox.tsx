@@ -15,13 +15,13 @@ export const WasteBox: FC<Props> = ({ entry, state }) => {
 
     useEffect(() => {
         if (entry.startUnit == StartUnit.joules) {
-            changeConvertedNumber(entry.conversionFactor * state.joules);
+            changeConvertedNumber(entry.conversionFactor * state.convertToJoules);
         } else if (entry.startUnit == StartUnit.gallons) {
-            changeConvertedNumber(entry.conversionFactor * state.gallons);
+            changeConvertedNumber(entry.conversionFactor * state.convertToGallons);
         } else if (entry.startUnit == StartUnit.kilogramsCarbon) {
-            changeConvertedNumber(entry.conversionFactor * state.kilogramsCarbon);
+            changeConvertedNumber(entry.conversionFactor * state.convertToKilogramsCarbon);
         }
-    }, [state.gallons, state.joules, state.kilogramsCarbon])
+    }, [state.tokens])
 
     return <>
         <div className="rounded-xl bg-waste m-2 place-self-center flex p-5 pl-2 shadow-xl hover:-translate-y-1 transition-all w-1/2 font-serif">
