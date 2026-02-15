@@ -1,7 +1,7 @@
 "use client";
 
 import { CreateMLCEngine } from "@mlc-ai/web-llm";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import { Messages } from "./Messages";
 import { QueryBox } from "./QueryBox";
@@ -25,6 +25,7 @@ export type MessagesT = (
 
 export const Chat: FC = () => {
   const [engine, setEngine] = useState<MLCEngine>();
+  const [startedLoading, setStartedLoading] = useState(false);
   const [modelLoad, setModelLoad] = useState("");
 
   const [query, setQuery] = useState("");
@@ -32,6 +33,8 @@ export const Chat: FC = () => {
   const [messages, setMessages] = useState<MessagesT>([
     { role: "system", content: "You are a helpful AI assistant." },
   ]);
+
+  const ref = useRef<HTMLDivElement>(null);
 
   const generateResponse = async (): Promise<void> => {
     const oldMessages = messages;
@@ -50,6 +53,7 @@ export const Chat: FC = () => {
     for await (const chunk of chunks) {
       reply += chunk.choices[0]?.delta.content ?? "";
       setResponse(reply);
+      ref.current?.scrollTo({ top: ref.current.scrollHeight });
     }
     setResponse(undefined);
     setMessages((m) => [
@@ -62,17 +66,23 @@ export const Chat: FC = () => {
   };
 
   const onSubmit = (): void => {
+    setQuery("");
     void generateResponse();
   };
 
   return (
-    <div className="flex w-md flex-col">
+    <div className="flex w-lg flex-col gap-2">
       {engine === undefined ? (
         <>
+          <div className="text-center">
+            In order to begin, you must load the model.
+          </div>
           <button
-            className="border"
+            className="border hover:cursor-pointer"
+            disabled={startedLoading}
             onClick={() => {
               void (async (): Promise<void> => {
+                setStartedLoading(true);
                 // Initialize with a progress callback
                 const initProgressCallback = (
                   progress: InitProgressReport
@@ -98,7 +108,7 @@ export const Chat: FC = () => {
         </>
       ) : (
         <>
-          <Messages messages={messages} response={response} />
+          <Messages messages={messages} response={response} ref={ref} />
           <QueryBox query={query} setQuery={setQuery} onSubmit={onSubmit} />
         </>
       )}
